@@ -7,3 +7,7 @@ echo 'Section "InputClass"
         Option "NaturalScrolling" "true"
 EndSection' > /etc/X11/xorg.conf.d/40-libinput.conf 
 echo 'exec startlxde' > /home/jake/.xinitrc
+
+ID=$(blkid /dev/mmcblk0p2 -s UUID -o value)
+echo "${ID}"
+#efibootmgr --create --disk /dev/mmcblk0 --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=UUID=710b4faa-7539-475c-8cbd-d7530e1c70b2 rw initrd=\initramfs-linux.img'
