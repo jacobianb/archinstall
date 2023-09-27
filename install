@@ -1,3 +1,11 @@
+pacstrap -K /mnt base linux linux-firmware nano iwd lxde xorg-xinit pulseaudio firefox
+
+#autostart networking
+systemctl enable systemd-networkd.service
+systemctl enable systemd-resolved.service
+systemctl enable iwd.service
+
+#fix mouse
 echo 'Section "InputClass"
         Identifier "libinput touchpad catchall"
         MatchIsTouchpad "on"
