@@ -1,4 +1,14 @@
-pacstrap -K /mnt base linux linux-firmware nano iwd lxde xorg-xinit pulseaudio firefox
+pacstrap -K /mnt base linux linux-firmware nano iwd lxde xorg-xinit xfce4-power-manager pulseaudio firefox
+
+arch-chroot /mnt
+
+ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
+hwclock --systohc
+
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+
+echo "jake-banon" > /etc/hostname
 
 #autostart networking
 systemctl enable systemd-networkd.service
@@ -17,5 +27,4 @@ EndSection' > /etc/X11/xorg.conf.d/40-libinput.conf
 echo 'exec startlxde' > /home/jake/.xinitrc
 
 ID=$(blkid /dev/mmcblk0p2 -s UUID -o value)
-echo "${ID}"
-#efibootmgr --create --disk /dev/mmcblk0 --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=UUID=710b4faa-7539-475c-8cbd-d7530e1c70b2 rw initrd=\initramfs-linux.img'
+efibootmgr --create --disk /dev/mmcblk0 --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=${ID} rw initrd=\initramfs-linux.img'
