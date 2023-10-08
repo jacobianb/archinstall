@@ -1,4 +1,4 @@
-pacstrap -K /mnt base linux linux-firmware nano iwd lxde xorg-xinit xfce4-power-manager pulseaudio firefox
+pacstrap -K /mnt base linux linux-firmware nano iwd lxde xorg-xinit xorg-xbacklight xfce4-power-manager pulseaudio firefox
 
 arch-chroot /mnt
 
